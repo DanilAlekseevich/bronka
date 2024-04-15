@@ -1,0 +1,5 @@
+house_controller:
+    resource:
+        path: ../src/Booking/House/Infrastructure/Symfony/
+        namespace: Booking\House\Infrastructure\Symfony
+    type: attribute
