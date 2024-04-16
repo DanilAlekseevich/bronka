@@ -9,6 +9,7 @@ use Shared\Application\Command\CommandInterface;
 class CreateHouseCommand implements CommandInterface
 {
     public function __construct(
+        public string $houseId,
         public string $ownerId,
         public string $name,
         public int $peopleCapacity,

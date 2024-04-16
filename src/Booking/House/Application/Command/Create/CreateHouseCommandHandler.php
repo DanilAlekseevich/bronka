@@ -12,6 +12,7 @@ use Booking\House\Domain\ValueObject\HousePrice;
 use Booking\Shared\Domain\HouseId;
 use Booking\Shared\Domain\OwnerId;
 use Shared\Application\Command\CommandHandlerInterface;
+use Symfony\Component\Uid\Uuid;
 
 final readonly class CreateHouseCommandHandler implements CommandHandlerInterface
 {
@@ -20,10 +21,10 @@ final readonly class CreateHouseCommandHandler implements CommandHandlerInterfac
     ) {
     }
 
-    public function __invoke(CreateHouseCommand $command): HouseId
+    public function __invoke(CreateHouseCommand $command): void
     {
-        $houseId = new HouseId(Uuid::uuid7(new \DateTimeImmutable()));
-        $ownerId = new OwnerId(Uuid::fromString($command->ownerId));
+        $houseId = new HouseId(Uuid::v7()->jsonSerialize());
+        $ownerId = new OwnerId($command->ownerId);
         $name = new HouseName($command->name);
         $capacity = new HouseCapacity($command->peopleCapacity, $command->bedsCount);
         $price = new HousePrice($command->defaultPrice, $command->weekendPrice);
@@ -37,7 +38,5 @@ final readonly class CreateHouseCommandHandler implements CommandHandlerInterfac
         );
 
        $this->repository->create($house);
-
-        return $houseId;
     }
 }

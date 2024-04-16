@@ -1,3 +1,5 @@
+/.idea
+/.zed
 
 ###> symfony/framework-bundle ###
 /.env.local

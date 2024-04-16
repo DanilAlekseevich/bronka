@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace Booking\Shared\Domain;
 
-use Ramsey\Uuid\UuidInterface;
-
 final readonly class HouseId
 {
-    public function __construct(private UuidInterface $id)
+    public function __construct(private string $id)
     {
     }
 
-    public function getValue(): UuidInterface
+    public function getValue(): string
     {
         return $this->id;
     }
