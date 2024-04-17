@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  pg_db:
+    image: postgres:16.2-alpine3.19
+    environment:
+      POSTGRES_DB: "bronka"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "123456"
+    volumes:
+      - ./docker/postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  php-fpm:
+    container_name: php
+    build:
+      context: ./docker/php-fpm
+    volumes:
+      - ./:/var/www/html
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    ports:
+      - '8777:80'
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - php-fpm
