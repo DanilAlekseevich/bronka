@@ -12,7 +12,7 @@ use Booking\Shared\Domain\HouseId;
 use Booking\Shared\Domain\OwnerId;
 use Shared\Domain\AggregateRoot;
 
-readonly class House extends AggregateRoot
+class House extends AggregateRoot
 {
     public function __construct(
         private HouseId $id,

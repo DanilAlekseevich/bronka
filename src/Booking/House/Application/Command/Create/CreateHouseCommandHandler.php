@@ -14,29 +14,25 @@ use Booking\Shared\Domain\OwnerId;
 use Shared\Application\Command\CommandHandlerInterface;
 use Symfony\Component\Uid\Uuid;
 
-final readonly class CreateHouseCommandHandler implements CommandHandlerInterface
+final readonly class CreateHouseCommandHandler implements
+    CommandHandlerInterface
 {
-    public function __construct(
-        private HouseRepositoryInterface $repository
-    ) {
+    public function __construct(private HouseRepositoryInterface $repository)
+    {
     }
 
     public function __invoke(CreateHouseCommand $command): void
     {
-        $houseId = new HouseId(Uuid::v7()->jsonSerialize());
+        $houseId = new HouseId($command->houseId);
         $ownerId = new OwnerId($command->ownerId);
         $name = new HouseName($command->name);
-        $capacity = new HouseCapacity($command->peopleCapacity, $command->bedsCount);
-        $price = new HousePrice($command->defaultPrice, $command->weekendPrice);
-
-        $house = new House(
-            $houseId,
-            $ownerId,
-            $name,
-            $capacity,
-            $price
+        $capacity = new HouseCapacity(
+            $command->peopleCapacity,
+            $command->bedsCount
         );
+        $price = new HousePrice($command->defaultPrice, $command->weekendPrice);
+        $house = new House($houseId, $ownerId, $name, $capacity, $price);
 
-       $this->repository->create($house);
+        $this->repository->create($house);
     }
 }
