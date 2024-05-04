@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Booking\User\Domain;
 
 use Booking\User\Domain\Entity\User;
