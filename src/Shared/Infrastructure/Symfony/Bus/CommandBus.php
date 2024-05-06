@@ -20,6 +20,6 @@ final class CommandBus implements CommandBusInterface
     
     public function execute(CommandInterface $command): mixed
     {
-        return $this->handle($command);
+        return $this->commandBus->dispatch($command);
     }
 }

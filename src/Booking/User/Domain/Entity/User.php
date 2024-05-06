@@ -12,6 +12,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $id;
     private string $email;
     private string $password;
+
+    private array $roles = [];
     
     public function getId(): string
     {
@@ -45,7 +47,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     
     public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function addRoles(array $roles): void
+    {
+        $this->roles[] = $roles;
     }
     
     public function eraseCredentials(): void

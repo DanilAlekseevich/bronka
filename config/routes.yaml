@@ -3,3 +3,9 @@ house_controller:
         path: ../src/Booking/House/Infrastructure/Symfony/
         namespace: Booking\House\Infrastructure\Symfony
     type: attribute
+    
+user_controller:
+    resource:
+        path: ../src/Booking/User/Presentation/
+        namespace: Booking\User\Presentation
+    type: attribute

@@ -13,5 +13,5 @@ RUN apk add --no-cache $PHPIZE_DEPS \
     pdo \
     pdo_pgsql \
     && pecl install amqp \
-    && docker-php-ext-enable amqp \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=compose
+    && docker-php-ext-enable amqp
+

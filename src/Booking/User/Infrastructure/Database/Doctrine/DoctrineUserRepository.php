@@ -56,6 +56,6 @@ class DoctrineUserRepository extends ServiceEntityRepository implements
 
     public function getById(mixed $id): User
     {
-        // TODO: Implement getById() method.
+        return $this->find($id);
     }
 }
