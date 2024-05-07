@@ -14,14 +14,6 @@ services:
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
 
-
-    Shared\:
-        resource: '../src/Shared'
-        exclude:
-            - '../src/Shared/Infrastructure/Symfony/Kernel.php'
-    Booking\:
-        resource: '../src/Booking'
-
     _instanceof:
         Shared\Application\Command\CommandHandlerInterface:
             tags:
@@ -30,6 +22,14 @@ services:
         Shared\Application\Query\QueryHandlerInterface:
             tags:
                 - { name: messenger.message_handler, bus: query.bus }
+
+    Shared\:
+        resource: '../src/Shared'
+        exclude:
+            - '../src/Shared/Infrastructure/Symfony/Kernel.php'
+
+    Booking\:
+        resource: '../src/Booking'
 
 
     # add more service definitions when explicit configuration is needed

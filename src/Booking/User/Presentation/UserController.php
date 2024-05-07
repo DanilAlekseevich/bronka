@@ -24,7 +24,7 @@ final class UserController extends AbstractController
     }
 
     #[Route("/user/registration", name: "user_registration", methods: ["POST"])]
-    public function registartion(
+    public function registration(
         #[MapRequestPayload] UserRegistration $dto
     ): JsonResponse {
         $userId = Uuid::v7()->jsonSerialize();
@@ -32,20 +32,5 @@ final class UserController extends AbstractController
         $this->commandBus->execute($command);
 
         return $this->json("user created");
-    }
-
-    #[Route("/user/login", name:"user_login", methods: ["POST"])]
-    public function login(#[CurrentUser] ?User $user): JsonResponse
-    {
-        if (null === $user) {
-            return $this->json(
-                [
-                "message"=> "missing credentials",
-                ], 
-                Response::HTTP_UNAUTHORIZED
-            );
-        }
-
-        return $this->json($user->getUserIdentifier());
     }
 }
