@@ -1,7 +1,7 @@
 house_controller:
     resource:
-        path: ../src/Booking/House/Infrastructure/Symfony/
-        namespace: Booking\House\Infrastructure\Symfony
+        path: ../src/Booking/House/Presentation/
+        namespace: Booking\House\Presentation
     type: attribute
     
 user_controller:

@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Booking\House\Infrastructure\Symfony;
+namespace Booking\House\Presentation;
 
-use Booking\House\Application\Command\Create\CreateHouseCommand;;
-
+use Booking\House\Application\Command\Create\CreateHouseCommand;
 use Booking\House\Application\DTO\CreateHouse;
 use Shared\Application\Command\CommandBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +20,7 @@ class HouseController extends AbstractController
     ) {
     }
 
-    #[Route("/house/create", name: "house_create", methods: ["POST"])]
+    #[Route("/api/v1/house/create", name: "house_create", methods: ["POST"])]
     public function create(#[MapRequestPayload] CreateHouse $dto): JsonResponse
     {
         $houseId = Uuid::v7()->jsonSerialize();

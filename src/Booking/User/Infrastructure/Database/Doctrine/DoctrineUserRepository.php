@@ -49,13 +49,17 @@ class DoctrineUserRepository extends ServiceEntityRepository implements
 
     public function create(User $user): void
     {
-        $em = $this->getEntityManager();
-        $em->persist($user);
-        $em->flush();
+        $this->getEntityManager()->persist($user);
+        $this->save($user);
     }
 
-    public function getById(mixed $id): User
+    public function getById(mixed $id): ?User
     {
         return $this->find($id);
+    }
+    
+    public function save(User $user): void
+    {
+        $this->getEntityManager()->flush();
     }
 }

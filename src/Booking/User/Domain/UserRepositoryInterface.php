@@ -9,5 +9,6 @@ use Booking\User\Domain\Entity\User;
 interface UserRepositoryInterface
 {
     public function create(User $user): void;
-    public function getById(mixed $id): User;
+    public function getById(mixed $id): ?User;
+    public function save(User $user): void;
 }
