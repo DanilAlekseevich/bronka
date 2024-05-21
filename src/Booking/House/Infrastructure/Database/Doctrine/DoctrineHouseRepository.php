@@ -7,17 +7,21 @@ namespace Booking\House\Infrastructure\Database\Doctrine;
 use Booking\House\Domain\House;
 use Booking\House\Domain\HouseRepositoryInterface;
 use Booking\Shared\Domain\HouseId;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-final class DoctrineHouseRepository implements HouseRepositoryInterface
+final class DoctrineHouseRepository extends ServiceEntityRepository implements HouseRepositoryInterface
 {
     
     public function create(House $house): House
     {
-        // TODO: Implement create() method.
+       $this->getEntityManager()->persist($house);
+       $this->getEntityManager()->flush();
+       
+       return $house;
     }
     
     public function getById(HouseId $id): House
     {
-        // TODO: Implement getById() method.
+    
     }
 }
