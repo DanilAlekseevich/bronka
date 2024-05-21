@@ -68,4 +68,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->email;
     }
+    
+    public function setHouseOwner(): void
+    {
+        $this->addRoles(['ROLE_HOUSE_OWNER']);
+    }
 }

@@ -8,7 +8,7 @@ use Shared\Domain\Event\IntegrationEventInterface;
 
 final readonly class UserBecomeHouseOwner implements IntegrationEventInterface
 {
-    public function __construct(private string $userId)
+    public function __construct(public string $userId)
     {
     }
 }
